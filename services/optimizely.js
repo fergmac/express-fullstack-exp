@@ -5,10 +5,30 @@ class OptimizelyService {
 
 	constructor() {
 		this.client = {};
-		this.getUser();
+		// this.createUserId();
+		// this.getUser();
 		this.getDataFile();
 		this.updateDataFile();
 	}
+	// TODO: bring getUser() into service;
+	// getUser(req, res, next) {
+	// 	return function(req, res, next) {	
+	// 		if (req.cookies['optimizely_user']) {
+	// 		   userId = req.cookies['optimizely_user'];
+	// 		   console.log('userId' + userId);
+	// 		} else {
+	// 		   userId = createUserId();
+	// 		   console.log('createUserId ' + userId);
+	// 		   res.cookie('optimizely_user', userId, { expire: new Date() + 1800000 });
+	// 		}
+
+	// 		next();
+	// 	}
+	// }
+
+	// createUserId() {
+	// 	return Math.random().toString(36).substring(7);
+	// }
 
 	updateDataFile() {
 		this.getDataFile();
@@ -21,10 +41,6 @@ class OptimizelyService {
 		});		
 	}
 
-	// TODO: bring getUser() into service;
-	getUser() {
-		
-	}
 
 }
 
