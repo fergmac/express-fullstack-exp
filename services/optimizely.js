@@ -9,26 +9,8 @@ class OptimizelyService {
 		// this.getUser();
 		this.getDataFile();
 		this.updateDataFile();
+		this.getVariation();
 	}
-	// TODO: bring getUser() into service;
-	// getUser(req, res, next) {
-	// 	return function(req, res, next) {	
-	// 		if (req.cookies['optimizely_user']) {
-	// 		   userId = req.cookies['optimizely_user'];
-	// 		   console.log('userId' + userId);
-	// 		} else {
-	// 		   userId = createUserId();
-	// 		   console.log('createUserId ' + userId);
-	// 		   res.cookie('optimizely_user', userId, { expire: new Date() + 1800000 });
-	// 		}
-
-	// 		next();
-	// 	}
-	// }
-
-	// createUserId() {
-	// 	return Math.random().toString(36).substring(7);
-	// }
 
 	updateDataFile() {
 		this.getDataFile();
@@ -41,7 +23,14 @@ class OptimizelyService {
 		});		
 	}
 
+	getVariation() {
+		return (req, res) => {
+			
+			const variation = this.client.activate('express-playground', req.userId);
 
+			res.send(variation);
+		}
+	}
 }
 
 module.exports = OptimizelyService;

@@ -14,9 +14,12 @@ app.use(getUser());
 
 app.get('/', (req, res) => {
 
-	const variation = optimizely.client.activate('express-playground', req.userId);
+	// TODO: Moved to services/optimizely as getVariation();
+	// const variation = optimizely.client.activate('express-playground', req.userId);
 
-	res.send(variation);
+	// res.send(variation);
+
+	optimizely.client.getVariation();
 });
 
 app.get('/update_data_file', () => {
