@@ -6,37 +6,15 @@ const OptimizelyService = require('./services/optimizely');
 const port = process.env.PORT || 3000;
 const app = express();
 const optimizely = new OptimizelyService();
-
-const setOptimizelyUser = (req, res, next) => {
-	return function(req, res, next) {	
-		// TODO: move to service as getUser();
-		if (req.cookies['optimizely_user']) {
-		   userId = req.cookies['optimizely_user'];
-		   console.log('userId' + userId);
-		} else {
-		   userId = createUserId();
-		   console.log('createUserId ' + userId);
-		   res.cookie('optimizely_user', userId, { expire: new Date() + 1800000 });
-		}
-
-		next();
-	}
-}
+const getUser = require('./middleware/get-user.js');
 
 // Middleware
 app.use(cookieParser());
-app.use(setOptimizelyUser());
-
-let userId;
-
-// Create ID
-const createUserId = () => {
-	return Math.random().toString(36).substring(7);
-}
+app.use(getUser());
 
 app.get('/', (req, res) => {
 
-	const variation = optimizely.client.activate('express-playground', userId);
+	const variation = optimizely.client.activate('express-playground', req.userId);
 
 	res.send(variation);
 });
