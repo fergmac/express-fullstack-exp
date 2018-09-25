@@ -4,12 +4,11 @@ const optimizely = new OptimizelyService();
 module.exports = (router) => {
 	router.get('/', (req, res) => {
 
-		// TODO: Moved to services/optimizely as getVariation();
-		// const variation = optimizely.client.activate('express-playground', req.userId);
+		const variation = optimizely.client.activate('express-playground', req.userId);
 
-		// res.send(variation);
+		res.send(variation);
 		
-		optimizely.client.getVariation();
+		// optimizely.client.getVariation();
 	});
 
 	router.get('/update_data_file', () => {
