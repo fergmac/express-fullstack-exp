@@ -11,7 +11,7 @@ module.exports = () => {
 		} else {
 		   req.userId = createUserId();
 		   console.log('createUserId ' + req.userId);
-		   res.cookie('optimizely_user', userId, { expire: new Date() + 1800000 });
+		   res.cookie('optimizely_user', req.userId, { expire: new Date() + 1800000 });
 		}
 		next();
 	}

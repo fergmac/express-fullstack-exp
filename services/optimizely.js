@@ -20,15 +20,16 @@ class OptimizelyService {
 		axios.get('https://cdn.optimizely.com/datafiles/MspCQ3UTqvTiQXj4gYYQiN.json')
 		.then(({ data }) => {
 			this.client = optimizely.createInstance({ datafile: data, skipJSONValidation: true });
-		});		
+		});
 	}
 
 	getVariation() {
 		return (req, res) => {
 			
 			const variation = this.client.activate('express-playground', req.userId);
-
+			console.log('variation ' + variation);
 			res.send(variation);
+
 		}
 	}
 }

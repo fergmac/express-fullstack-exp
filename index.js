@@ -1,26 +1,28 @@
 const express = require('express');
-const fs = require('fs');
-const resolve = require('path').resolve;
 const cookieParser = require('cookie-parser');
-const OptimizelyService = require('./services/optimizely');
 const port = process.env.PORT || 3000;
 const app = express();
-const optimizely = new OptimizelyService();
 const getUser = require('./middleware/get-user.js');
+const router = express.Router();
+
 
 // Middleware
 app.use(cookieParser());
 app.use(getUser());
 
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
 
-	// TODO: Moved to services/optimizely as getVariation();
-	// const variation = optimizely.client.activate('express-playground', req.userId);
+// 	// TODO: Moved to services/optimizely as getVariation();
+// 	// const variation = optimizely.client.activate('express-playground', req.userId);
 
-	// res.send(variation);
+// 	// res.send(variation);
 
-	optimizely.client.getVariation();
-});
+// 	optimizely.client.getVariation();
+// });
+
+// TODO: refactor to bring in routes from routes folder 
+require('./routes')(router);
+app.use(router);
 
 app.get('/update_data_file', () => {
 	optimizely.client.updateDataFile();
