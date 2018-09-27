@@ -32,6 +32,16 @@ module.exports = (router) => {
 		        pageTitle: 'Cart Page',
 		        welcomeMessage: 'Welcome to my Cart'
 		    });
+
+		// Track a conversion event for the provided user with attributes
+		const eventKey = 'CLICK_ADD_TO_CART';
+		const attributes = {
+			  DEVICE: 'desktop',
+			};
+
+		const goals = req.optimizely.client.track(eventKey, req.userId, attributes);
+		res.send(goals);
+		// res.send(req.optimizely.client);
 	});
 
 	router.get('/update_data_file', () => {
