@@ -1,9 +1,7 @@
 const express = require('express');
-const fs = require('fs');
-const resolve = require('path').resolve;
 const cookieParser = require('cookie-parser');
 const OptimizelyService = require('./services/optimizely');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const app = express();
 const optimizely = new OptimizelyService();
 const getUser = require('./middleware/get-user.js');
