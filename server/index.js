@@ -6,6 +6,11 @@ const app = express();
 const getUser = require('./middleware/get-user.js');
 const router = express.Router();
 
+// HBS setup
+const path = require('path');
+app.set('views', path.join(__dirname, 'views/'));
+app.set('view engine', 'hbs');
+
 // Middleware
 app.use(cookieParser());
 app.use(getUser());

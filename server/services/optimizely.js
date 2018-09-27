@@ -11,13 +11,12 @@ class OptimizelyService {
 		.then(() => this.getClient());
 	}
 
+	getClient() {
+		this.client = optimizely.createInstance({ datafile: this.datafile, skipJSONValidation: true });
+	}
 
 	updateDataFile() {
 		this.getDataFile();
-	}
-
-	getClient() {
-		this.client = optimizely.createInstance({ datafile: this.datafile, skipJSONValidation: true });
 	}
 
 	async getDataFile() {

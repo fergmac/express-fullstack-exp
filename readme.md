@@ -16,3 +16,6 @@ TODO:
 OR
 
 * Better to store middleware in services folder?
+
+1. TODO: add template cta from backend add click goal to the cta
+2. TODO: learn how attributes work, only runs on desktop - how to stop from running on mobile
