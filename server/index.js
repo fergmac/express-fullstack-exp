@@ -3,13 +3,13 @@ const cookieParser = require('cookie-parser');
 const OptimizelyService = require('./services/optimizely');
 const port = process.env.PORT || 5000;
 const app = express();
-const optimizely = new OptimizelyService();
 const getUser = require('./middleware/get-user.js');
 const router = express.Router();
 
 // Middleware
 app.use(cookieParser());
 app.use(getUser());
+app.use(OptimizelyService.initialize());
 
 // Routes
 require('./routes/index.js')(router);

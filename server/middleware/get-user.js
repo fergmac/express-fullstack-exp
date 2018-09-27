@@ -1,6 +1,8 @@
+const uuidv4 = require('uuid/v4');
+
 // Create ID
 const createUserId = () => {
-	return Math.random().toString(36).substring(7);
+	return uuidv4();
 }
 
 module.exports = () => {

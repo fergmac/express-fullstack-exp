@@ -5,30 +5,41 @@ class OptimizelyService {
 
 	constructor() {
 		this.client = {};
-		this.getDataFile();
-		this.updateDataFile();
-		// this.getVariation();
+		this.datafile = null;
+
+		this.getDataFile()
+		.then(() => this.getClient());
 	}
+
 
 	updateDataFile() {
 		this.getDataFile();
 	}
 
-	getDataFile() {
-		axios.get('https://cdn.optimizely.com/datafiles/MspCQ3UTqvTiQXj4gYYQiN.json')
-		.then(({ data }) => {
-			this.client = optimizely.createInstance({ datafile: data, skipJSONValidation: true });
-		});		
+	getClient() {
+		this.client = optimizely.createInstance({ datafile: this.datafile, skipJSONValidation: true });
 	}
 
-	// getVariation() {
-	// 	return (req, res) => {
+	async getDataFile() {
+		const res = await axios.get('https://cdn.optimizely.com/datafiles/MspCQ3UTqvTiQXj4gYYQiN.json');
+		this.datafile = res.data;
+		
+		return Promise.resolve();
+	}
 
-	// 		const variation = optimizely.client.activate('express-playground', req.userId);
+	static initialize() {
 
-	// 		res.send(variation);
-	// 	}
-	// }
+		const optimizely = new OptimizelyService();
+
+		return (req, res, next) => {
+
+			req.optimizely = optimizely;
+
+			// TODO: return an optimizely object with && set user ID 
+			next();
+
+		}
+	}
 }
 
 module.exports = OptimizelyService;
