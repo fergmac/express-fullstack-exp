@@ -1,4 +1,4 @@
-const uuidv4 = require('uuid/v4');
+import uuidv4 from 'uuid/v4';
 
 // Create ID
 const createUserId = () => {
@@ -8,12 +8,12 @@ const createUserId = () => {
 module.exports = () => {
 	return function(req, res, next) {	
 		if (req.cookies['optimizely_user']) {
-		   req.userId = req.cookies['optimizely_user'];
-		   console.log('userId ' + req.userId);
+			req.userId = req.cookies['optimizely_user'];
+			console.log('userId ' + req.userId);
 		} else {
-		   req.userId = createUserId();
-		   console.log('createUserId ' + req.userId);
-		   res.cookie('optimizely_user', req.userId, { expire: new Date() + 1800000 });
+			req.userId = createUserId();
+			console.log('createUserId ' + req.userId);
+			res.cookie('optimizely_user', req.userId, { expire: new Date() + 1800000 });
 		}
 		next();
 	}

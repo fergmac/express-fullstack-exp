@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const cookieParser = require('cookie-parser');
 const OptimizelyService = require('./services/optimizely');
 const port = process.env.PORT || 5000;
