@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 const optimizely = require('@optimizely/optimizely-sdk');
 
 class OptimizelyService {

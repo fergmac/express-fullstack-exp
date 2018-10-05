@@ -1,4 +1,4 @@
-import OptimizelyService from '../services/optimizely';
+const OptimizelyService = require('../services/optimizely');
 const optimizely = new OptimizelyService();
 const hbs = require('hbs');
 
