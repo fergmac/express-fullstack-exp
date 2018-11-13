@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const OptimizelyService = require('./services/optimizely');
 const port = process.env.PORT || 5000;
 const app = express();
-const getUser = require('./middleware/get-user.js');
+// const getUser = require('./middleware/get-user.js');
 const router = express.Router();
 
 // HBS setup
@@ -13,7 +13,7 @@ app.set('view engine', 'hbs');
 
 // Middleware
 app.use(cookieParser());
-app.use(getUser());
+// app.use(getUser());
 app.use(OptimizelyService.initialize());
 
 // Routes
