@@ -46,8 +46,15 @@ class OptimizelyService {
 		}
 	}
 
-	static setOptimizelyUser(req) {
-		return req.cookies['optimizely_user'] = req.cookies['optimizely_user'] ? req.cookies['optimizely_user'] : uuidv4();
+	static setOptimizelyUser(req, res) {
+		if (req.cookies['optimizely_user']) {
+			req.userId = req.cookies['optimizely_user'];
+		} else {
+			req.userId = uuidv4();
+			res.cookie('optimizely_user', req.userId, { expire: new Date() + 1800000 });
+		}
+		
+		return req.userId;
 	}
 
 	static initialize() {
@@ -56,7 +63,7 @@ class OptimizelyService {
 
 		return (req, res, next) => {
 
-			optimizelyClient.optimizelyUser = this.setOptimizelyUser(req);
+			optimizelyClient.optimizelyUser = this.setOptimizelyUser(req, res);
 
 			req.optimizely = optimizelyClient;
 
