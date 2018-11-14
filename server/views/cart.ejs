@@ -7,6 +7,13 @@
     <body>
     	<h1><%= pageTitle %></h1>
     	<p><%= welcomeMessage %></p>
-    	<button class='add-to-cart-btn'><%= btnPrompt %></button>
+        <button class='add-to-cart-btn'><%= btnPrompt %></button>
     </body>
+    <script>
+        // debugger;
+            var addToCartCta = document.getElementsByClassName('add-to-cart-btn')[0];
+            addToCartCta.addEventListener('click', function() { 
+                // debugger;
+            });
+    </script>
 </html>

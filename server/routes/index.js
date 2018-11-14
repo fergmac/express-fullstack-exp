@@ -14,8 +14,8 @@ module.exports = (router) => {
 		    res.render('cart.ejs', {
 		        pageTitle: 'Cart Page',
 		        welcomeMessage: 'Welcome to my Cart',
-		        btnPrompt: 'Add To Cart'
-		    });
+				btnPrompt: 'Add To Cart',
+			});
 
 		// Track a conversion event for the provided user with attributes
 		req.optimizely.track('CLICK_ADD_TO_CART');
